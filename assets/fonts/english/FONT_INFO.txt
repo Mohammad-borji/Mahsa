@@ -1,0 +1,2 @@
+English Display & Editorial Typography: Cinzel & Cormorant Garamond (loaded via Google Fonts CDN with local serif fallback).
+Place custom .woff2 files here if self-hosting offline.

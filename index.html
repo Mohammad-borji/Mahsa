@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="MAHSA — A Journey Written in Stars. An interactive cinematic birthday experience." />
+  <title>MAHSA — A Journey Written in Stars</title>
+
+  <!-- Google Fonts: Cinzel, Cormorant Garamond, Plus Jakarta Sans & Vazirmatn (Persian) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Plus+Jakarta+Sans:wght@400;500&family=Vazirmatn:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Modular Stylesheets -->
+  <link rel="stylesheet" href="css/variables.css" />
+  <link rel="stylesheet" href="css/reset.css" />
+  <link rel="stylesheet" href="css/typography.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/scenes.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/animations.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+
+  <!-- GSAP 3.12.5 -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <!-- Modular ES6 Entry -->
+  <script type="module" src="js/main.js"></script>
+</head>
+<body>
+
+  <!-- Preloader -->
+  <div id="preloader" role="status" aria-live="polite">
+    <svg class="preloader-star" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+      <path d="M32 4 L37 26 L59 32 L37 38 L32 60 L27 38 L5 32 L27 26 Z" fill="#FFF0C2"/>
+    </svg>
+    <p class="preloader-text">Preparing the Stars for Mahsa...</p>
+  </div>
+
+  <!-- Golden Gate Flash Transition Overlay -->
+  <div id="light-transition-overlay" aria-hidden="true"></div>
+
+  <!-- Top Minimal HUD -->
+  <header class="hud-header">
+    <div class="hud-brand" aria-label="Mahsa — A Journey Written in Stars">MAHSA &mdash; WRITTEN IN STARS</div>
+    <div class="hud-controls">
+      <nav class="scene-nav-dots" aria-label="Story Scenes">
+        <button type="button" class="scene-dot is-active" data-scene-target="0" aria-label="Scene 1: The Beginning" title="01 — The Beginning"></button>
+        <button type="button" class="scene-dot" data-scene-target="1" aria-label="Scene 2: The Enchanted Garden" title="02 — The Enchanted Garden"></button>
+        <button type="button" class="scene-dot" data-scene-target="2" aria-label="Scene 3: The Golden Gate" title="03 — The Golden Gate"></button>
+        <button type="button" class="scene-dot" data-scene-target="3" aria-label="Scene 4: The Birthday Celebration" title="04 — The Birthday Celebration"></button>
+        <button type="button" class="scene-dot" data-scene-target="4" aria-label="Scene 5: The Moon and the Message" title="05 — The Moon and the Message"></button>
+      </nav>
+      <button type="button" id="btn-audio-toggle" class="audio-toggle-btn" aria-pressed="false" aria-label="Toggle Ambient Sound">
+        <svg class="audio-icon icon-sound-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+          <line x1="23" y1="9" x2="17" y2="15"></line>
+          <line x1="17" y1="9" x2="23" y2="15"></line>
+        </svg>
+        <svg class="audio-icon icon-sound-on" style="display:none;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+          <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+          <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
+        </svg>
+        <span class="audio-label-text">Muted</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Interactive Viewport -->
+  <main id="app-viewport">
+    <canvas id="cosmos-canvas" aria-hidden="true"></canvas>
+    <canvas id="fx-canvas" aria-hidden="true"></canvas>
+
+    <div id="scenes-stage">
+
+      <!-- ====================================================================
+           SCENE 01 — THE BEGINNING
+           ==================================================================== -->
+      <section id="scene-01" class="scene is-active" aria-label="Scene 1: The Beginning">
+        <div class="scene-backdrop">
+          <div class="drifting-cloud cloud-1"></div>
+          <div class="drifting-cloud cloud-2"></div>
+          <!-- Distant subtle crescent moon -->
+          <svg class="sky-crescent-distant" viewBox="0 0 80 80" fill="none" role="img" aria-label="Distant crescent moon">
+            <path d="M52 60 C36 60 24 47 24 31 C24 21 29 12 37 7 C23 9 13 21 13 36 C13 52 26 65 42 65 C52 65 61 60 66 52 C62 57 57 60 52 60 Z" fill="#F6E7C1" opacity="0.88"/>
+          </svg>
+          <!-- Illuminated distant horizon silhouettes -->
+          <svg class="horizon-landscape" viewBox="0 0 1440 320" preserveAspectRatio="none" aria-hidden="true">
+            <defs>
+              <linearGradient id="horizonGlow" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#7CA2F5" stop-opacity="0.38"/>
+                <stop offset="100%" stop-color="#050816" stop-opacity="0"/>
+              </linearGradient>
+            </defs>
+            <ellipse cx="720" cy="255" rx="620" ry="95" fill="url(#horizonGlow)"/>
+            <path d="M0 260 Q240 210 520 245 T1020 230 T1440 255 L1440 320 L0 320 Z" fill="#070D22" opacity="0.85"/>
+            <path d="M0 282 Q360 242 720 268 T1440 275 L1440 320 L0 320 Z" fill="#030612"/>
+          </svg>
+        </div>
+        <div class="scene-vignette"></div>
+
+        <div class="scene-content-top">
+          <p class="eyebrow-label">Chapter I &bull; Beneath the Midnight Sky</p>
+        </div>
+
+        <div class="scene-centerpiece">
+          <h1 class="cinematic-quote">&ldquo;Sometimes, the most beautiful things begin with an unexpected journey...&rdquo;</h1>
+        </div>
+
+        <div class="scene-actions-bottom">
+          <button type="button" id="btn-begin-journey" class="cinematic-btn">
+            <span>BEGIN THE JOURNEY</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+              <path d="M5 12h14M13 5l7 7-7 7"/>
+            </svg>
+          </button>
+          <span class="scroll-cue">Scroll or click to travel toward the horizon</span>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SCENE 02 — THE ENCHANTED GARDEN
+           ==================================================================== -->
+      <section id="scene-02" class="scene" aria-label="Scene 2: The Enchanted Garden">
+        <div class="scene-backdrop"></div>
+        <div class="scene-vignette"></div>
+
+        <div class="scene-content-top">
+          <p class="eyebrow-label">Chapter II &bull; The Enchanted Garden</p>
+          <h2 class="cinematic-quote">&ldquo;Some kinds of beauty cannot be explained with words...&rdquo;</h2>
+        </div>
+
+        <div class="scene-centerpiece">
+          <div class="garden-stage-wrapper">
+            <svg class="garden-svg-scene" viewBox="0 0 1000 440" role="img" aria-label="An enchanted moonlit garden of roses, white lilies, and a stone pathway">
+              <defs>
+                <linearGradient id="pathStoneGrad" x1="50%" y1="0%" x2="50%" y2="100%">
+                  <stop offset="0%" stop-color="#E8C987" stop-opacity="0.45"/>
+                  <stop offset="45%" stop-color="#4A5D58" stop-opacity="0.65"/>
+                  <stop offset="100%" stop-color="#192B26" stop-opacity="0.9"/>
+                </linearGradient>
+                <radialGradient id="distantGateGlow" cx="50%" cy="50%" r="50%">
+                  <stop offset="0%" stop-color="#FFF0C2" stop-opacity="0.75"/>
+                  <stop offset="55%" stop-color="#E8C987" stop-opacity="0.22"/>
+                  <stop offset="100%" stop-color="#E8C987" stop-opacity="0"/>
+                </radialGradient>
+                <radialGradient id="crimsonRoseGrad" cx="50%" cy="40%" r="55%">
+                  <stop offset="0%" stop-color="#FFD6E2"/>
+                  <stop offset="45%" stop-color="#D94B72"/>
+                  <stop offset="100%" stop-color="#5E1028"/>
+                </radialGradient>
+                <radialGradient id="pinkRoseGrad" cx="50%" cy="40%" r="55%">
+                  <stop offset="0%" stop-color="#FFF0F5"/>
+                  <stop offset="50%" stop-color="#F29BB4"/>
+                  <stop offset="100%" stop-color="#9E3B5A"/>
+                </radialGradient>
+                <radialGradient id="ivoryLilyGrad" cx="50%" cy="45%" r="55%">
+                  <stop offset="0%" stop-color="#FFFFFF"/>
+                  <stop offset="70%" stop-color="#F5EFE2"/>
+                  <stop offset="100%" stop-color="#C8B89A"/>
+                </radialGradient>
+              </defs>
+
+              <!-- Distant Glowing Horizon Structure at end of path -->
+              <circle cx="500" cy="148" r="85" fill="url(#distantGateGlow)"/>
+              <path d="M478 185 L478 132 A22 22 0 0 1 522 132 L522 185 Z" fill="none" stroke="#E8C987" stroke-width="1.6" opacity="0.65"/>
+
+              <!-- Rolling Garden Hills -->
+              <path d="M0 245 Q240 175 500 185 Q760 175 1000 245 L1000 440 L0 440 Z" fill="#081C18"/>
+              <path d="M0 300 Q280 230 500 240 Q720 230 1000 300 L1000 440 L0 440 Z" fill="#0B251F"/>
+
+              <!-- Winding Stone Pathway leading to the Golden Gate -->
+              <path d="M482 185 Q495 250 435 315 Q375 375 410 440 L595 440 Q555 375 545 315 Q530 250 518 185 Z" fill="url(#pathStoneGrad)" opacity="0.82"/>
+              <ellipse cx="500" cy="235" rx="22" ry="6" fill="#C7D2CC" opacity="0.28"/>
+              <ellipse cx="486" cy="278" rx="32" ry="8" fill="#C7D2CC" opacity="0.32"/>
+              <ellipse cx="472" cy="332" rx="44" ry="11" fill="#C7D2CC" opacity="0.35"/>
+              <ellipse cx="492" cy="392" rx="58" ry="14" fill="#C7D2CC" opacity="0.38"/>
+
+              <!-- Subtle Hidden Crescent Moon etched on a moss stone beside the right lilies (Unexplained private reference) -->
+              <g id="garden-secret-moon" class="hidden-garden-moon" transform="translate(652, 348)">
+                <ellipse cx="14" cy="16" rx="18" ry="11" fill="#18332B" stroke="#2D4F44" stroke-width="1"/>
+                <path d="M16.5 20.5 C12.2 20.5 8.8 17.1 8.8 12.8 C8.8 10.1 10.2 7.6 12.5 6.3 C8.5 6.8 5.4 10.2 5.4 14.3 C5.4 18.8 9.0 22.4 13.5 22.4 C16.3 22.4 18.8 20.9 20.2 18.7 C19.1 19.8 17.8 20.5 16.5 20.5 Z" fill="#F5E6C8"/>
+              </g>
+
+              <!-- Interactive Flower 1: Left Crimson Rose Bush -->
+              <g class="flower-node rose-node sway-slow" data-bloom-note="Crimson roses glow softly in the moonlight..." tabindex="0" role="button" aria-label="Crimson Rose">
+                <path d="M180 410 Q172 340 165 280" stroke="#245239" stroke-width="4" fill="none"/>
+                <path d="M172 350 Q145 335 138 348 Q155 362 172 354 Z" fill="#2A5E42"/>
+                <circle cx="165" cy="272" r="26" fill="url(#crimsonRoseGrad)"/>
+                <path d="M148 268 C150 252, 180 252, 182 268 C182 284, 148 284, 148 268 Z" fill="#F284A4" opacity="0.8"/>
+                <circle cx="165" cy="268" r="8" fill="#FFD6E2" opacity="0.9"/>
+              </g>
+
+              <!-- Interactive Flower 2: Left Elegant White Lily -->
+              <g class="flower-node lily-node sway-delayed" data-bloom-note="Pure white lilies shimmer with silver dew..." tabindex="0" role="button" aria-label="White Lily">
+                <path d="M275 425 Q282 355 270 295" stroke="#2D6144" stroke-width="3.6" fill="none"/>
+                <g transform="translate(240, 250)">
+                  <path d="M30 8 C20 24, 20 38, 30 48 C40 38, 40 24, 30 8 Z" fill="url(#ivoryLilyGrad)"/>
+                  <path d="M4 26 C18 24, 26 32, 30 48 C16 48, 6 40, 4 26 Z" fill="url(#ivoryLilyGrad)"/>
+                  <path d="M56 26 C42 24, 34 32, 30 48 C44 48, 54 40, 56 26 Z" fill="url(#ivoryLilyGrad)"/>
+                  <circle cx="26" cy="34" r="2.2" fill="#E8C987"/>
+                  <circle cx="30" cy="30" r="2.2" fill="#E8C987"/>
+                  <circle cx="34" cy="34" r="2.2" fill="#E8C987"/>
+                </g>
+              </g>
+
+              <!-- Interactive Flower 3: Left-Center Blush Pink Rose -->
+              <g class="flower-node rose-node sway-slow" data-bloom-note="Blush pink petals drift along the stone path..." tabindex="0" role="button" aria-label="Blush Pink Rose">
+                <path d="M368 430 Q360 368 375 318" stroke="#245239" stroke-width="3.5" fill="none"/>
+                <circle cx="375" cy="312" r="22" fill="url(#pinkRoseGrad)"/>
+                <circle cx="375" cy="309" r="11" fill="#FFE8F0" opacity="0.88"/>
+              </g>
+
+              <!-- Interactive Flower 4: Right-Center White Rose & Lily Cluster -->
+              <g class="flower-node lily-node sway-delayed" data-bloom-note="Starlight rests gently upon the ivory petals..." tabindex="0" role="button" aria-label="Ivory Rose and Lily">
+                <path d="M625 428 Q632 365 618 310" stroke="#2D6144" stroke-width="3.6" fill="none"/>
+                <circle cx="618" cy="304" r="23" fill="url(#ivoryLilyGrad)"/>
+                <circle cx="618" cy="301" r="10" fill="#FFFDF9"/>
+              </g>
+
+              <!-- Interactive Flower 5: Right Elegant White Lily -->
+              <g class="flower-node lily-node sway-slow" data-bloom-note="Every bloom turns softly toward the golden horizon..." tabindex="0" role="button" aria-label="Moonlit White Lily">
+                <path d="M735 420 Q725 350 742 282" stroke="#2D6144" stroke-width="3.8" fill="none"/>
+                <g transform="translate(712, 238)">
+                  <path d="M30 6 C19 23, 19 39, 30 50 C41 39, 41 23, 30 6 Z" fill="url(#ivoryLilyGrad)"/>
+                  <path d="M2 25 C17 23, 26 32, 30 50 C15 50, 5 40, 2 25 Z" fill="url(#ivoryLilyGrad)"/>
+                  <path d="M58 25 C43 23, 34 32, 30 50 C45 50, 55 40, 58 25 Z" fill="url(#ivoryLilyGrad)"/>
+                  <circle cx="30" cy="32" r="2.5" fill="#E8C987"/>
+                </g>
+              </g>
+
+              <!-- Interactive Flower 6: Far Right Crimson Rose -->
+              <g class="flower-node rose-node sway-delayed" data-bloom-note="Velvet roses guard the path to the golden gate..." tabindex="0" role="button" aria-label="Velvet Crimson Rose">
+                <path d="M835 415 Q845 345 828 276" stroke="#245239" stroke-width="4" fill="none"/>
+                <circle cx="828" cy="270" r="25" fill="url(#crimsonRoseGrad)"/>
+                <circle cx="828" cy="267" r="11" fill="#F59BB6" opacity="0.88"/>
+              </g>
+
+              <!-- Luminous Butterflies -->
+              <g class="butterfly-anim" transform="translate(310, 215)">
+                <path d="M12 10 C4 0, 0 8, 8 14 C2 18, 6 24, 12 16 C18 24, 22 18, 16 14 C24 8, 20 0, 12 10 Z" fill="#FFF0C2" opacity="0.86"/>
+              </g>
+              <g class="butterfly-anim" transform="translate(680, 195) scale(0.85)">
+                <path d="M12 10 C4 0, 0 8, 8 14 C2 18, 6 24, 12 16 C18 24, 22 18, 16 14 C24 8, 20 0, 12 10 Z" fill="#FFD6E2" opacity="0.82"/>
+              </g>
+            </svg>
+            <p id="garden-whisper-text" class="garden-whisper-pill" aria-live="polite">Touch or hover over the roses and lilies to awaken their light</p>
+          </div>
+        </div>
+
+        <div class="scene-actions-bottom">
+          <button type="button" id="btn-follow-pathway" class="cinematic-btn">
+            <span>FOLLOW THE PATHWAY</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+              <path d="M5 12h14M13 5l7 7-7 7"/>
+            </svg>
+          </button>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SCENE 03 — THE GOLDEN GATE
+           ==================================================================== -->
+      <section id="scene-03" class="scene" aria-label="Scene 3: The Golden Gate">
+        <div class="scene-backdrop"></div>
+        <div class="scene-vignette"></div>
+
+        <div class="scene-content-top">
+          <p class="eyebrow-label">Chapter III &bull; The Threshold of Light</p>
+          <h2 class="cinematic-quote">&ldquo;And now... something beautiful is waiting for you.&rdquo;</h2>
+        </div>
+
+        <div class="scene-centerpiece">
+          <div id="portal-arch-interactive" class="portal-arch-container" role="button" tabindex="0" aria-label="Golden Magical Gateway — Activate to enter">
+            <div class="portal-core-glow"></div>
+            <svg class="portal-svg" viewBox="0 0 400 480" fill="none" aria-hidden="true">
+              <defs>
+                <linearGradient id="archGold" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#FFF4D2"/>
+                  <stop offset="50%" stop-color="#E8C987"/>
+                  <stop offset="100%" stop-color="#9E7B3E"/>
+                </linearGradient>
+                <radialGradient id="rayGrad" cx="50%" cy="52%" r="55%">
+                  <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.95"/>
+                  <stop offset="45%" stop-color="#FFF0C2" stop-opacity="0.55"/>
+                  <stop offset="100%" stop-color="#E8C987" stop-opacity="0"/>
+                </radialGradient>
+              </defs>
+              <!-- Light Rays & Ground Reflection -->
+              <circle cx="200" cy="250" r="165" fill="url(#rayGrad)"/>
+              <ellipse cx="200" cy="438" rx="145" ry="18" fill="#FFF0C2" opacity="0.35"/>
+
+              <!-- Outer & Inner Fantasy Archway Pillars -->
+              <path d="M88 435 L88 210 A112 112 0 0 1 312 210 L312 435" stroke="url(#archGold)" stroke-width="8" stroke-linecap="round"/>
+              <path d="M106 435 L106 212 A94 94 0 0 1 294 212 L294 435" stroke="url(#archGold)" stroke-width="3" stroke-dasharray="6 4" opacity="0.85"/>
+              <path d="M118 435 L118 215 A82 82 0 0 1 282 215 L282 435" fill="#FFF9E6" fill-opacity="0.22" stroke="#FFF4D2" stroke-width="2"/>
+
+              <!-- Crown Star Filigree at Crest of Arch -->
+              <path d="M200 66 L206 88 L228 94 L206 100 L200 122 L194 100 L172 94 L194 88 Z" fill="#FFF4D2"/>
+              <circle cx="200" cy="94" r="18" stroke="url(#archGold)" stroke-width="1.5" opacity="0.7"/>
+
+              <!-- Base Pedestals -->
+              <rect x="70" y="428" width="56" height="14" rx="4" fill="url(#archGold)"/>
+              <rect x="274" y="428" width="56" height="14" rx="4" fill="url(#archGold)"/>
+            </svg>
+          </div>
+        </div>
+
+        <div class="scene-actions-bottom">
+          <p id="portal-illumination-status" class="portal-energy-meter">Touch the gateway or click below to step through</p>
+          <button type="button" id="btn-enter-gate" class="cinematic-btn">
+            <span>ENTER</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+              <path d="M5 12h14M13 5l7 7-7 7"/>
+            </svg>
+          </button>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SCENE 04 — THE BIRTHDAY CELEBRATION
+           ==================================================================== -->
+      <section id="scene-04" class="scene" aria-label="Scene 4: The Birthday Celebration">
+        <div class="scene-backdrop"></div>
+        <div class="scene-vignette"></div>
+
+        <div class="scene-content-top">
+          <p class="birthday-heading-sub">HAPPY BIRTHDAY</p>
+          <h2 class="birthday-heading-name">MAHSA</h2>
+        </div>
+
+        <div class="scene-centerpiece">
+          <div id="cake-stage-wrapper" class="cake-stage-wrapper">
+            <div class="cake-aura-ring"></div>
+            <svg id="birthday-cake-interactive" class="birthday-cake-svg" viewBox="0 0 420 390" role="img" aria-label="Multi-layer luxury birthday cake surrounded by roses, white lilies, and glowing candles">
+              <defs>
+                <linearGradient id="tierIvory" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stop-color="#EAE0D0"/>
+                  <stop offset="50%" stop-color="#FFFDF9"/>
+                  <stop offset="100%" stop-color="#DFD2BE"/>
+                </linearGradient>
+                <linearGradient id="tierBlush" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stop-color="#E5C5CE"/>
+                  <stop offset="50%" stop-color="#FFF5F8"/>
+                  <stop offset="100%" stop-color="#D8B2BE"/>
+                </linearGradient>
+                <linearGradient id="goldStand" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stop-color="#9E7B3E"/>
+                  <stop offset="50%" stop-color="#FFF0C2"/>
+                  <stop offset="100%" stop-color="#B58E4C"/>
+                </linearGradient>
+                <radialGradient id="flameGlow" cx="50%" cy="50%" r="50%">
+                  <stop offset="0%" stop-color="#FFFFFF"/>
+                  <stop offset="40%" stop-color="#FFE58F"/>
+                  <stop offset="100%" stop-color="#F59E0B" stop-opacity="0"/>
+                </radialGradient>
+              </defs>
+
+              <!-- Pedestal Cake Stand -->
+              <ellipse cx="210" cy="356" rx="110" ry="12" fill="url(#goldStand)" opacity="0.85"/>
+              <path d="M180 325 L240 325 L255 354 L165 354 Z" fill="url(#goldStand)"/>
+              <ellipse cx="210" cy="324" rx="156" ry="16" fill="url(#goldStand)"/>
+
+              <!-- Bottom Tier (1st Layer) -->
+              <rect x="86" y="238" width="248" height="84" rx="14" fill="url(#tierIvory)" stroke="#E8C987" stroke-width="1.5"/>
+              <path d="M86 254 Q117 272 148 254 Q179 272 210 254 Q241 272 272 254 Q303 272 334 254" fill="none" stroke="#E8C987" stroke-width="2.2"/>
+
+              <!-- Middle Tier (2nd Layer) -->
+              <rect x="116" y="166" width="188" height="74" rx="12" fill="url(#tierBlush)" stroke="#E8C987" stroke-width="1.5"/>
+              <path d="M116 182 Q147 198 178 182 Q210 198 242 182 Q273 198 304 182" fill="none" stroke="#E8C987" stroke-width="2"/>
+
+              <!-- Top Tier (3rd Layer) -->
+              <rect x="148" y="106" width="124" height="62" rx="10" fill="url(#tierIvory)" stroke="#E8C987" stroke-width="1.5"/>
+              <path d="M148 120 Q179 134 210 120 Q241 134 272 120" fill="none" stroke="#E8C987" stroke-width="1.8"/>
+
+              <!-- Five Glowing Candles -->
+              <g id="cake-candles">
+                <rect x="166" y="70" width="7" height="36" rx="3" fill="#FFFDF7" stroke="#E8C987" stroke-width="0.8"/>
+                <rect x="186" y="64" width="7" height="42" rx="3" fill="#FFFDF7" stroke="#E8C987" stroke-width="0.8"/>
+                <rect x="206.5" y="58" width="7" height="48" rx="3" fill="#FFFDF7" stroke="#E8C987" stroke-width="0.8"/>
+                <rect x="227" y="64" width="7" height="42" rx="3" fill="#FFFDF7" stroke="#E8C987" stroke-width="0.8"/>
+                <rect x="247" y="70" width="7" height="36" rx="3" fill="#FFFDF7" stroke="#E8C987" stroke-width="0.8"/>
+
+                <g class="candle-flame-group">
+                  <!-- Halos -->
+                  <circle cx="169.5" cy="58" r="18" fill="url(#flameGlow)"/>
+                  <circle cx="189.5" cy="52" r="18" fill="url(#flameGlow)"/>
+                  <circle cx="210" cy="45" r="22" fill="url(#flameGlow)"/>
+                  <circle cx="230.5" cy="52" r="18" fill="url(#flameGlow)"/>
+                  <circle cx="250.5" cy="58" r="18" fill="url(#flameGlow)"/>
+                  <!-- Flame teardrops -->
+                  <path d="M169.5 45 C165 53, 165 61, 169.5 64 C174 61, 174 53, 169.5 45 Z" fill="#FFF8DC"/>
+                  <path d="M189.5 39 C185 47, 185 55, 189.5 58 C194 55, 194 47, 189.5 39 Z" fill="#FFF8DC"/>
+                  <path d="M210 31 C205 40, 205 49, 210 53 C215 49, 215 40, 210 31 Z" fill="#FFFFFF"/>
+                  <path d="M230.5 39 C226 47, 226 55, 230.5 58 C235 55, 235 47, 230.5 39 Z" fill="#FFF8DC"/>
+                  <path d="M250.5 45 C246 53, 246 61, 250.5 64 C255 61, 255 53, 250.5 45 Z" fill="#FFF8DC"/>
+                </g>
+              </g>
+
+              <!-- Botanical Garland of Roses & White Lilies around the Cake -->
+              <g>
+                <!-- Left Roses & Lilies -->
+                <circle cx="92" cy="316" r="18" fill="#D94B72"/>
+                <circle cx="92" cy="314" r="9" fill="#FFD6E2"/>
+                <circle cx="122" cy="322" r="15" fill="#FBF8F1"/>
+                <circle cx="122" cy="322" r="4" fill="#E8C987"/>
+                <circle cx="144" cy="236" r="14" fill="#F29BB4"/>
+                <circle cx="144" cy="235" r="6" fill="#FFF0F5"/>
+                <!-- Right Roses & Lilies -->
+                <circle cx="328" cy="316" r="18" fill="#D94B72"/>
+                <circle cx="328" cy="314" r="9" fill="#FFD6E2"/>
+                <circle cx="298" cy="322" r="15" fill="#FBF8F1"/>
+                <circle cx="298" cy="322" r="4" fill="#E8C987"/>
+                <circle cx="276" cy="236" r="14" fill="#F29BB4"/>
+                <circle cx="276" cy="235" r="6" fill="#FFF0F5"/>
+                <!-- Center Rose Accent -->
+                <circle cx="210" cy="166" r="13" fill="#D94B72"/>
+                <circle cx="210" cy="165" r="6" fill="#FFD6E2"/>
+              </g>
+            </svg>
+          </div>
+        </div>
+
+        <div class="scene-actions-bottom">
+          <button type="button" id="btn-make-wish" class="cinematic-btn">
+            <span>MAKE A WISH</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+              <path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 16.8l-6.2 4.5 2.4-7.4L2 9.4h7.6z"/>
+            </svg>
+          </button>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SCENE 05 — THE MOON AND THE MESSAGE
+           ==================================================================== -->
+      <section id="scene-05" class="scene" aria-label="Scene 5: The Moon and the Message">
+        <div class="scene-backdrop">
+          <div class="drifting-cloud cloud-1" style="background: radial-gradient(ellipse at center, rgba(201, 184, 245, 0.32) 0%, transparent 72%);"></div>
+          <div class="drifting-cloud cloud-2" style="background: radial-gradient(ellipse at center, rgba(176, 152, 235, 0.28) 0%, transparent 72%);"></div>
+        </div>
+        <div class="scene-vignette"></div>
+
+        <div class="climax-layout">
+          <!-- Large Glowing Crescent Moon -->
+          <div class="climax-moon-wrapper">
+            <svg viewBox="0 0 140 140" fill="none" role="img" aria-label="Glowing Crescent Moon">
+              <defs>
+                <linearGradient id="climaxMoonGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#FFFFFF"/>
+                  <stop offset="55%" stop-color="#FFF0C2"/>
+                  <stop offset="100%" stop-color="#E0C07D"/>
+                </linearGradient>
+              </defs>
+              <circle cx="70" cy="70" r="62" fill="#FFF0C2" opacity="0.14"/>
+              <path d="M92 106 C64 106 42 84 42 56 C42 38 51 22 66 13 C41 16 22 37 22 63 C22 91 45 114 73 114 C91 114 107 105 116 91 C109 100 101 106 92 106 Z" fill="url(#climaxMoonGrad)"/>
+            </svg>
+          </div>
+
+          <!-- First Reveal: MAHSA -->
+          <h2 class="climax-name-reveal">MAHSA</h2>
+
+          <!-- Exact Persian Birthday Message (Right-to-Left) -->
+          <article class="message-glass-panel persian-message-card" lang="fa" dir="rtl">
+            <p class="persian-line">بعضی آدمها شاید ندونن، ولی حضورشون حتی توی روزهای معمولی هم میتونه یه حس خوب به آدم بده.</p>
+            <p class="persian-line">امیدوارم سال جدید زندگیت پر از اتفاقهایی باشه که از ته دل خوشحالت میکنن. همیشه بخندی، به چیزهایی که دوست داری برسی و هیچوقت درخشیدنت رو فراموش نکنی.</p>
+            <p class="persian-line persian-climax-greeting">تولدت مبارک مهسا! 🌙</p>
+          </article>
+
+          <!-- Final Signature -->
+          <p class="final-signature" dir="ltr">Made with a little extra care. ✨</p>
+        </div>
+
+        <div class="scene-actions-bottom">
+          <button type="button" id="btn-replay-journey" class="cinematic-btn">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+              <path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/>
+            </svg>
+            <span>REPLAY EXPERIENCE</span>
+          </button>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+</body>
+</html>
