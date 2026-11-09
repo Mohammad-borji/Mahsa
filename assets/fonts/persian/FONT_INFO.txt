@@ -1,0 +1,1 @@
+Persian Typography: Vazirmatn & Lalezar (loaded via Google Fonts CDN).

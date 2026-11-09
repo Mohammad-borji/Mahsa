@@ -1,0 +1,40 @@
+/* ==========================================================================
+   CSS VARIABLES — MAHSA: A JOURNEY WRITTEN IN STARS (PHOTOREALISTIC EDITION)
+   ========================================================================== */
+:root {
+  --bg-deep-midnight: #03050f;
+  --gold-primary: #edd092;
+  --gold-bright: #fff4d0;
+  --gold-warm: #f5b95f;
+  --rose-crimson: #e64c78;
+  --rose-pink: #f9a8c0;
+  --lily-ivory: #fffdf8;
+  --moon-silver: #f5f0e6;
+  --lavender-soft: #d5c6ff;
+
+  --text-primary: #ffffff;
+  --text-secondary: rgba(255, 252, 245, 0.9);
+  --text-muted: rgba(255, 248, 235, 0.68);
+  --text-gold: #f5d996;
+
+  --surface-glass: rgba(7, 10, 26, 0.58);
+  --surface-glass-deep: rgba(6, 8, 22, 0.72);
+  --border-subtle: rgba(237, 208, 146, 0.34);
+  --border-bright: rgba(255, 244, 208, 0.78);
+
+  --font-persian: 'Vazirmatn', 'Tahoma', sans-serif;
+  --font-display: 'Cinzel', 'Cormorant Garamond', Georgia, serif;
+
+  --ease-cinematic: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-dream: cubic-bezier(0.16, 1, 0.3, 1);
+
+  --z-photo: 1;
+  --z-lighting: 3;
+  --z-canvas-bg: 5;
+  --z-hotspots: 12;
+  --z-canvas-fg: 18;
+  --z-scene-ui: 25;
+  --z-flash: 40;
+  --z-hud: 50;
+  --z-preloader: 100;
+}

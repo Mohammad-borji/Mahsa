@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="مهسا — سفری نوشته‌شده در ستاره‌ها. یک تجربه سینمایی و تعاملی تولد." />
+  <title>مهسا — سفری نوشته‌شده در ستاره‌ها | MAHSA</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Vazirmatn:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/variables.css" />
+  <link rel="stylesheet" href="css/reset.css" />
+  <link rel="stylesheet" href="css/typography.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/scenes.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/animations.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <script type="module" src="js/main.js"></script>
+</head>
+<body>
+
+  <!-- Preloader -->
+  <div id="preloader" role="status" aria-live="polite">
+    <svg class="preloader-star" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+      <path d="M32 4 L37 26 L59 32 L37 38 L32 60 L27 38 L5 32 L27 26 Z" fill="#FFF0C2"/>
+    </svg>
+    <p class="preloader-text">در حال آماده‌سازی آسمان پرستاره برای مهسا...</p>
+  </div>
+
+  <!-- Golden Gate Flash Transition Overlay -->
+  <div id="light-transition-overlay" aria-hidden="true"></div>
+
+  <!-- Top Minimal HUD (Persian RTL) -->
+  <header class="hud-header">
+    <div class="hud-brand" aria-label="مهسا — سفری نوشته‌شده در ستاره‌ها">مهسا &bull; سفری در دل ستاره‌ها ✨</div>
+    <div class="hud-controls">
+      <nav class="scene-nav-dots" aria-label="بخش‌های سفر">
+        <button type="button" class="scene-dot is-active" data-scene-target="0" aria-label="صحنه اول: آغاز سفر" title="۱ — آغاز سفر"></button>
+        <button type="button" class="scene-dot" data-scene-target="1" aria-label="صحنه دوم: باغ افسون‌شده" title="۲ — باغ افسون‌شده"></button>
+        <button type="button" class="scene-dot" data-scene-target="2" aria-label="صحنه سوم: دروازه طلایی" title="۳ — دروازه طلایی"></button>
+        <button type="button" class="scene-dot" data-scene-target="3" aria-label="صحنه چهارم: جشن تولد" title="۴ — جشن تولد مهسا"></button>
+        <button type="button" class="scene-dot" data-scene-target="4" aria-label="صحنه پنجم: ماه و پیام تولد" title="۵ — ماه و پیام تولد"></button>
+      </nav>
+      <button type="button" id="btn-audio-toggle" class="audio-toggle-btn" aria-pressed="false" aria-label="پخش یا قطع موسیقی فضا">
+        <svg class="audio-icon icon-sound-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+          <line x1="23" y1="9" x2="17" y2="15"></line>
+          <line x1="17" y1="9" x2="23" y2="15"></line>
+        </svg>
+        <svg class="audio-icon icon-sound-on" style="display:none;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+          <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+          <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
+        </svg>
+        <span class="audio-label-text">موسیقی خاموش</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Interactive Viewport -->
+  <main id="app-viewport">
+    <canvas id="cosmos-canvas" aria-hidden="true"></canvas>
+    <canvas id="fx-canvas" aria-hidden="true"></canvas>
+
+    <div id="scenes-stage">
+
+      <!-- ====================================================================
+           SCENE 01 — THE BEGINNING (PHOTOREALISTIC MIDNIGHT SKY)
+           ==================================================================== -->
+      <section id="scene-01" class="scene is-active" aria-label="صحنه اول: آغاز سفر در آسمان نیمه‌شب">
+        <div class="scene-backdrop">
+          <img class="scene-photo-img" src="assets/images/sky/midnight-horizon.webp" alt="آسمان پرستاره نیمه‌شب با هلال ماه و افق روشن" />
+          <div class="horizon-pulse-glow"></div>
+        </div>
+        <div class="scene-vignette"></div>
+
+        <div class="scene-content-top">
+          <p class="eyebrow-label">✦ فصل اول &bull; زیر آسمان بیکران شب</p>
+        </div>
+
+        <div class="scene-centerpiece">
+          <div>
+            <h1 class="cinematic-quote">«گاهی زیباترین قصه‌ها، با یک سفر غیرمنتظره در دل شب آغاز می‌شوند...»</h1>
+            <p class="cinematic-subquote">امشب ستاره‌ها مسیر تازه‌ای را برای تو روشن کرده‌اند</p>
+          </div>
+        </div>
+
+        <div class="scene-actions-bottom">
+          <button type="button" id="btn-begin-journey" class="cinematic-btn">
+            <span>آغاز این سفر جادویی</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="M19 12H5M12 19l-7-7 7-7"/>
+            </svg>
+          </button>
+          <span class="scroll-cue">برای حرکت به سوی افق روشن، کلیک کنید یا اسکرول نمایید</span>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SCENE 02 — THE ENCHANTED GARDEN (PHOTOREALISTIC ROSE & LILY GARDEN)
+           ==================================================================== -->
+      <section id="scene-02" class="scene" aria-label="صحنه دوم: باغ افسون‌شده رز و سوسن">
+        <div class="scene-backdrop">
+          <img class="scene-photo-img" src="assets/images/garden/enchanted-pathway.webp" alt="باغ مهتابی گل‌های رز سرخ و صورتی و سوسن‌های سپید با مسیر سنگ‌فرش" />
+        </div>
+        <div class="scene-vignette"></div>
+
+        <div class="scene-content-top">
+          <p class="eyebrow-label">✦ فصل دوم &bull; باغ افسون‌شده مهتاب</p>
+          <h2 class="cinematic-quote">«بعضی زیبایی‌ها را با هیچ واژه‌ای نمی‌توان توصیف کرد...»</h2>
+        </div>
+
+        <div class="scene-centerpiece">
+          <div class="garden-stage-wrapper">
+            <div class="garden-hotspots-layer">
+              <!-- Hotspot 1: Left Crimson Roses -->
+              <div class="flower-node rose-node" style="left: 14%; top: 62%;" data-bloom-note="رزهای سرخ در سکوت مهتاب، به احترام قدم‌های تو می‌درخشند..." tabindex="0" role="button" aria-label="رزهای سرخ باغ">
+                <span class="flower-tag">رزهای سرخ مهتابی</span>
+              </div>
+
+              <!-- Hotspot 2: Left White Stargazer Lilies -->
+              <div class="flower-node lily-node" style="left: 24%; top: 56%;" data-bloom-note="سوسن‌های سپید با شبنم شبانه، عطر آرامش را در نسیم رها کرده‌اند..." tabindex="0" role="button" aria-label="سوسن‌های سپید">
+                <span class="flower-tag">سوسن‌های سپید</span>
+              </div>
+
+              <!-- Hotspot 3: Center-Left Pink Rose Bushes -->
+              <div class="flower-node rose-node" style="left: 33%; top: 49%;" data-bloom-note="گلبرگ‌های لطیف صورتی در نسیم شبانه، مسیر نور را نشان می‌دهند..." tabindex="0" role="button" aria-label="رزهای صورتی">
+                <span class="flower-tag">غنچه‌های صورتی</span>
+              </div>
+
+              <!-- Hotspot 4: Center-Right White Lilies by the Path -->
+              <div class="flower-node lily-node" style="left: 54%; top: 57%;" data-bloom-note="در این باغ جادویی، هر شکوفه ستاره‌ای است که بر زمین نشسته..." tabindex="0" role="button" aria-label="سوسن‌های کنار مسیر">
+                <span class="flower-tag">سوسن‌های شبنم‌زده</span>
+              </div>
+
+              <!-- Hotspot 5: Right Lush Pink & Crimson Roses -->
+              <div class="flower-node rose-node" style="left: 84%; top: 48%;" data-bloom-note="عطر رزهای شبانه با نور کرم‌های شب‌تاب در هم آمیخته است..." tabindex="0" role="button" aria-label="رزهای معطر سمت راست">
+                <span class="flower-tag">رزهای مخملی</span>
+              </div>
+
+              <!-- Hotspot 6: Foreground Right White Lily -->
+              <div class="flower-node lily-node" style="left: 89%; top: 81%;" data-bloom-note="درخشش مهتاب بر گلبرگ‌های سپید سوسن آرام گرفته است..." tabindex="0" role="button" aria-label="سوسن سپید پیش‌زمینه">
+                <span class="flower-tag">سوسن مهتاب</span>
+              </div>
+
+              <!-- Subtle Hidden Crescent Moon Reference over the Carved Mossy Stone (Unexplained Private Memory) -->
+              <div id="garden-secret-moon" class="hidden-garden-moon" tabindex="0" role="button" aria-label="نشانه ماه">
+                <svg viewBox="0 0 64 64" fill="none" aria-hidden="true">
+                  <path d="M42.5 48.2C30.8 48.2 21.3 38.7 21.3 27c0-7.8 4.2-14.6 10.5-18.3-11.2 1.3-19.8 10.8-19.8 22.3 0 12.4 10.1 22.5 22.5 22.5 7.9 0 14.9-4.1 18.9-10.3-3.3 3.1-7.9 5-12.9 5z" fill="#FFF0C2"/>
+                </svg>
+              </div>
+            </div>
+
+            <p id="garden-whisper-text" class="garden-whisper-pill" aria-live="polite">روی گل‌های رز و سوسن در تصویر ضربه بزنید یا نشانگر را حرکت دهید تا بدرخشند ✨</p>
+          </div>
+        </div>
+
+        <div class="scene-actions-bottom">
+          <button type="button" id="btn-follow-pathway" class="cinematic-btn">
+            <span>ادامه مسیر در باغ مهتابی</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="M19 12H5M12 19l-7-7 7-7"/>
+            </svg>
+          </button>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SCENE 03 — THE GOLDEN GATE (PHOTOREALISTIC PORTAL ARCHWAY)
+           ==================================================================== -->
+      <section id="scene-03" class="scene" aria-label="صحنه سوم: دروازه طلایی نور">
+        <div class="scene-backdrop">
+          <img class="scene-photo-img" src="assets/images/portal/golden-arch-light.webp" alt="دروازه طلایی جادویی در انتهای باغ با پرتوهای باشکوه نور" />
+        </div>
+        <div class="scene-vignette"></div>
+
+        <div class="scene-content-top">
+          <p class="eyebrow-label">✦ فصل سوم &bull; آستانه دروازه طلایی</p>
+          <h2 class="cinematic-quote">«و حالا... در انتهای این مسیر، اتفاقی زیبا در انتظار توست.»</h2>
+        </div>
+
+        <div class="scene-centerpiece">
+          <div id="portal-arch-interactive" class="portal-arch-container" role="button" tabindex="0" aria-label="دروازه طلایی نور — برای ورود کلیک کنید">
+            <div class="portal-core-glow"></div>
+            <div class="portal-ring-indicator">
+              <svg width="34" height="34" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+                <path d="M32 6 L37 26 L57 32 L37 38 L32 58 L27 38 L7 32 L27 26 Z" fill="#FFF4D0"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <div class="scene-actions-bottom">
+          <p id="portal-illumination-status" class="portal-energy-meter">دروازه نور را لمس کنید یا دکمه زیر را بزنید تا وارد شوید</p>
+          <button type="button" id="btn-enter-gate" class="cinematic-btn">
+            <span>عبور از دروازه طلایی</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="M19 12H5M12 19l-7-7 7-7"/>
+            </svg>
+          </button>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SCENE 04 — THE BIRTHDAY CELEBRATION (PHOTOREALISTIC CAKE & CANDLES)
+           ==================================================================== -->
+      <section id="scene-04" class="scene" aria-label="صحنه چهارم: جشن تولد مهسا">
+        <div class="scene-backdrop">
+          <img class="scene-photo-img" src="assets/images/birthday/cake-candle-aura.webp" alt="کیک تولد سه طبقه مجلل با شمع‌های روشن و گل‌آرایی رز و سوسن" />
+        </div>
+        <div class="scene-vignette"></div>
+
+        <div class="scene-content-top">
+          <p class="birthday-heading-sub">تولدت مبارک</p>
+          <h2 class="birthday-heading-name">مهسا</h2>
+          <p class="birthday-heading-latin" dir="ltr">HAPPY BIRTHDAY MAHSA</p>
+        </div>
+
+        <div class="scene-centerpiece">
+          <div id="cake-stage-wrapper" class="cake-stage-wrapper" role="button" tabindex="0" aria-label="کیک تولد مهسا — برای آرزو کردن کلیک کنید">
+            <div class="cake-aura-ring"></div>
+            <!-- Interactive Dynamic Candle Flame Halos registered over the real cake candles -->
+            <svg id="birthday-cake-interactive" class="birthday-cake-svg" viewBox="0 0 400 400" aria-hidden="true">
+              <defs>
+                <radialGradient id="realCandleHalo" cx="50%" cy="50%" r="50%">
+                  <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.95"/>
+                  <stop offset="35%" stop-color="#FFE484" stop-opacity="0.65"/>
+                  <stop offset="70%" stop-color="#F59E0B" stop-opacity="0.22"/>
+                  <stop offset="100%" stop-color="#F59E0B" stop-opacity="0"/>
+                </radialGradient>
+              </defs>
+              <g class="candle-flame-group">
+                <circle cx="200" cy="78" r="78" fill="url(#realCandleHalo)"/>
+                <circle cx="176" cy="82" r="32" fill="url(#realCandleHalo)"/>
+                <circle cx="224" cy="82" r="32" fill="url(#realCandleHalo)"/>
+              </g>
+            </svg>
+          </div>
+        </div>
+
+        <div class="scene-actions-bottom">
+          <button type="button" id="btn-make-wish" class="cinematic-btn">
+            <span>یک آرزو کن ✨</span>
+          </button>
+          <span class="scroll-cue">چشم‌هایت را ببند، آرزویی کن و روی دکمه یا شمع‌ها بزن</span>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           SCENE 05 — THE MOON AND THE MESSAGE (PHOTOREALISTIC CLIMAX)
+           ==================================================================== -->
+      <section id="scene-05" class="scene" aria-label="صحنه پنجم: ماه و پیام تبریک تولد مهسا">
+        <div class="scene-backdrop">
+          <img class="scene-photo-img" src="assets/images/moon/lavender-night-sky.webp" alt="آسمان شب با هلال درخشان ماه و ابرهای بنفش و نقره‌ای" />
+        </div>
+        <div class="scene-vignette"></div>
+
+        <div class="climax-layout">
+          <div class="climax-moon-wrapper">
+            <svg viewBox="0 0 80 80" fill="none" aria-hidden="true">
+              <path d="M52 60 C36 60 24 47 24 31 C24 21 29 12 37 7 C23 9 13 21 13 36 C13 52 26 65 42 65 C52 65 61 60 66 52 C62 57 57 60 52 60 Z" fill="#FFF4D0"/>
+            </svg>
+          </div>
+
+          <h2 class="climax-name-reveal">مهسا</h2>
+          <p class="climax-name-latin" dir="ltr">M A H S A</p>
+
+          <!-- Exact Requested Persian Message -->
+          <article class="message-glass-panel persian-message-card" lang="fa" dir="rtl">
+            <p class="persian-line">بعضی آدمها شاید ندونن، ولی حضورشون حتی توی روزهای معمولی هم میتونه یه حس خوب به آدم بده.</p>
+            <p class="persian-line">امیدوارم سال جدید زندگیت پر از اتفاقهایی باشه که از ته دل خوشحالت میکنن. همیشه بخندی، به چیزهایی که دوست داری برسی و هیچوقت درخشیدنت رو فراموش نکنی.</p>
+            <p class="persian-line persian-climax-greeting">تولدت مبارک مهسا! 🌙</p>
+          </article>
+
+          <p class="final-signature">ساخته شده با کمی توجه و عشق بیشتر ✨</p>
+        </div>
+
+        <div class="scene-actions-bottom">
+          <button type="button" id="btn-replay-journey" class="cinematic-btn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/>
+            </svg>
+            <span>تجربه دوباره این سفر</span>
+          </button>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+</body>
+</html>

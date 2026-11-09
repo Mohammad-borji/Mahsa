@@ -1,0 +1,78 @@
+/* ==========================================================================
+   RESPONSIVE DESIGN — MOBILE & TABLET
+   ========================================================================== */
+@media (max-width: 768px) {
+  .hud-header {
+    padding: 0.75rem 0.95rem;
+  }
+
+  .hud-brand {
+    font-size: 0.72rem;
+    padding: 0.32rem 0.75rem;
+  }
+
+  .audio-label-text {
+    display: none;
+  }
+
+  .audio-toggle-btn {
+    padding: 0.45rem 0.65rem;
+  }
+
+  .scene {
+    padding: 4.1rem 1rem 2.2rem;
+  }
+
+  .cinematic-quote {
+    font-size: clamp(1.12rem, 4.4vw, 1.5rem);
+  }
+
+  .flower-node {
+    width: 56px;
+    height: 56px;
+  }
+
+  .message-glass-panel {
+    padding: 1.1rem 1.15rem;
+    border-radius: 18px;
+  }
+
+  .persian-line {
+    font-size: 0.95rem;
+    line-height: 1.95;
+    margin-bottom: 0.55rem;
+  }
+
+  .persian-line.persian-climax-greeting {
+    font-size: 1.2rem;
+  }
+
+  .cinematic-btn {
+    padding: 0.8rem 1.75rem;
+    font-size: 0.88rem;
+  }
+}
+
+@media (max-height: 540px) and (orientation: landscape) {
+  .scene {
+    padding: 3rem 1.5rem 1.2rem;
+  }
+
+  .cinematic-quote {
+    font-size: 1.1rem;
+  }
+
+  .climax-name-reveal {
+    font-size: 1.55rem;
+  }
+
+  .message-glass-panel {
+    padding: 0.8rem 1.2rem;
+  }
+
+  .persian-line {
+    font-size: 0.86rem;
+    line-height: 1.65;
+    margin-bottom: 0.3rem;
+  }
+}
