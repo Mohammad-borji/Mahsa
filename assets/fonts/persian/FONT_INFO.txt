@@ -1,2 +1,0 @@
-Persian Typography: Vazirmatn (loaded via Google Fonts CDN with local fallback).
-Place custom .woff2 files here if self-hosting offline.
